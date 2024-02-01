@@ -10,7 +10,13 @@
         nativeBuildInputs = with pkgs;[
           ninja
           meson
-          (with llvmPackages_latest; [ llvm lldb clang-tools ])
+          (with llvmPackages_latest; [
+            llvm
+            lldb
+            (clang-tools.overrideAttrs (_: {
+              unwrapped = clang-unwrapped;
+            }))
+          ])
         ];
 
         # buildInputs = [
