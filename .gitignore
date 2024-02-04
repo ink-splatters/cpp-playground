@@ -3,3 +3,4 @@
 /result
 /.direnv
 /.cache
+/.pre-commit-config.yaml
