@@ -6,7 +6,7 @@ project('cpp-playground', 'cpp',
                      'cpp_stdlib=libc++',
                      'optimization=3'])
 
-exe = executable('cpp-playground', 'cpp_playground.cpp',
+exe = executable('cpp-playground', 'main.cpp',
   install : true)
 
 test('basic', exe)
