@@ -23,17 +23,13 @@
           '';
         };
 
-        packages.default = {
-	  name = "cpp-playground";
-          # TODO: version
-
+        packages.default = stdenv.mkDerivation {
+          name = "cpp-playground";
           src = ./.;
-          inherit nativeBuildInputs;
 
-          buildPhase = ''
-            meson setup build
-            meson compile
-          '';
-	};
+          CXXFLAGS = if "${system}" == "aarch64-darwin" then "-mcpu=apple-m1" else "";
+
+          inherit nativeBuildInputs;
+        };
       });
 }
