@@ -5,7 +5,11 @@ project('cpp-playground', 'cpp',
                      'cpp_std=c++20',
                      'cpp_stdlib=libc++',
                      'optimization=3',
-                     'b_pch=true'])
+                     'b_pch=true',
+                     'b_lto=true',
+                     'b_lto_mode=thin',
+                     'b_thinlto_cache=true',
+                     ])
 
 
   sources = files(
