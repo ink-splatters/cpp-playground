@@ -22,6 +22,8 @@
 
         inherit (pkgs.llvmPackages) stdenv lld;
 
+        CXXFLAGS = pkgs.lib.optionalString ("${system}"=="aarch64-darwin") "-mcpu=apple-m1";
+
         nativeBuildInputs = with pkgs;[
           ninja
           meson
@@ -46,12 +48,13 @@
 
             tools = pkgs;
           };
+	  # TODO: default = ...
         };
 
         formatter = nixpkgs-fmt;
 
         devShell = mkShell.override { inherit stdenv; } {
-          inherit nativeBuildInputs;
+          inherit nativeBuildInputs CXXFLAGS;
 
           shellHook = self.checks.${system}.pre-commit-check.shellHook + ''
             export PS1="\n\[\033[01;32m\]\u $\[\033[00m\]\[\033[01;36m\] \w >\[\033[00m\] "
@@ -62,7 +65,7 @@
           name = "cpp-playground";
           src = ./.;
 
-          inherit nativeBuildInputs;
+          inherit nativeBuildInputs CXXFLAGS;
         };
       });
 }
